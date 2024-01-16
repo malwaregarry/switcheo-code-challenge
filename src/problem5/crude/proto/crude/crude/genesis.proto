@@ -1,0 +1,17 @@
+syntax = "proto3";
+package crude.crude;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "crude/crude/params.proto";
+
+option go_package = "crude/x/crude/types";
+
+// GenesisState defines the crude module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
