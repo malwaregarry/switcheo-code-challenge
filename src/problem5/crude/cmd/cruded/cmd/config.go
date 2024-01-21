@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"time"
+
 	cmtcfg "github.com/cometbft/cometbft/config"
 	serverconfig "github.com/cosmos/cosmos-sdk/server/config"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -13,8 +15,8 @@ func initSDKConfig() {
 	accountPubKeyPrefix := app.AccountAddressPrefix + "pub"
 	validatorAddressPrefix := app.AccountAddressPrefix + "valoper"
 	validatorPubKeyPrefix := app.AccountAddressPrefix + "valoperpub"
-	consNodeAddressPrefix := app.AccountAddressPrefix + "valcons"
-	consNodePubKeyPrefix := app.AccountAddressPrefix + "valconspub"
+	consNodeAddressPrefix := app.AccountAddressPrefix + "valcons" + "2"
+	consNodePubKeyPrefix := app.AccountAddressPrefix + "valconspub" + "2"
 
 	// Set and seal config
 	config := sdk.GetConfig()
@@ -32,6 +34,8 @@ func initCometBFTConfig() *cmtcfg.Config {
 	// these values put a higher strain on node memory
 	// cfg.P2P.MaxNumInboundPeers = 100
 	// cfg.P2P.MaxNumOutboundPeers = 40
+	cfg.Consensus.TimeoutPropose = 1000 * time.Millisecond
+	cfg.Consensus.TimeoutCommit = 1000 * time.Millisecond
 
 	return cfg
 }
