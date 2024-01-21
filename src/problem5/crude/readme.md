@@ -1,6 +1,11 @@
 # crude
 **crude** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite CLI](https://ignite.com/cli).
 
+The resource being managed contains contains the following fields:
+- name (string)
+- category (uint64)
+
+
 ## Get started
 
 ```
@@ -8,6 +13,22 @@ ignite chain serve
 ```
 
 `serve` command installs dependencies, builds, initializes, and starts your blockchain in development.
+
+### Functionality
+After starting the blockchain, the following CLI commands can be used to interact with it:
+
+#### Creating a resource
+* `cruded tx crude create-resource <name> <category> --from <user address> --chain-id crude`
+#### Updating a resource
+* `cruded tx crude update-resource <id> <name> <category> --from <user address> --chain-id crude`
+#### Deleting a resource
+* `cruded tx crude delete-resource <id> --from <user address> --chain-id crude`
+#### Showing resource details
+* `cruded q crude show-resource <id>`
+#### Listing available resoorce
+* `cruded q crude list-resource [--categery <category>]`
+ 
+The category flag can be used to list all resources belonging to a category.
 
 ### Configure
 
@@ -49,3 +70,4 @@ curl https://get.ignite.com/username/crude@latest! | sudo bash
 - [Ignite CLI docs](https://docs.ignite.com)
 - [Cosmos SDK docs](https://docs.cosmos.network)
 - [Developer Chat](https://discord.gg/ignite)
+
