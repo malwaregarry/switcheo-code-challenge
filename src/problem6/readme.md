@@ -1,4 +1,5 @@
 The following diagram shows a high level overview of the components that interact with the broadcaster service. 
+![Overview of the service](broadcaster-diagram.jpg)
 
 Additinally, an authorisation service is needed to check whether the client has admin privileges to retry a failed request. 
 The authorisation service can be any authorisation service already in use by the organisation.
@@ -13,7 +14,7 @@ A simple way to handle the different request is to have separate endpoints for e
 ```golang
 http.HandleFunc("/transaction/broadcast", handleBroadcastRequest)   // POST
 http.HandleFunc("/transaction/retry", handleRetryRequest)           // POST
-http.HandleFunc("/transaction", handleGetRequest)                   // GET
+http.HandleFunc("/transactions", handleGetRequest)                   // GET
 ```
 Each request will generate an asynchronous task, so that tasks can yield when it is blocked waiting for IO. 
 No synchronisation is required as the blockchain is assumed to have its own synchronisation mechanism and most transactional database engines have synchronisation built in.
