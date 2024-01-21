@@ -19,6 +19,10 @@ func (k msgServer) CreateResource(goCtx context.Context, msg *types.MsgCreateRes
 		Category: msg.Category,
 	}
 
+	if msg.Category == 0 {
+		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprint("Category cannot be 0"))
+	}
+
 	id := k.AppendResource(
 		ctx,
 		resource,
@@ -48,6 +52,10 @@ func (k msgServer) UpdateResource(goCtx context.Context, msg *types.MsgUpdateRes
 	// Checks if the msg creator is the same as the current owner
 	if msg.Creator != val.Creator {
 		return nil, errorsmod.Wrap(sdkerrors.ErrUnauthorized, "incorrect owner")
+	}
+
+	if msg.Category == 0 {
+		return nil, errorsmod.Wrap(sdkerrors.ErrInvalidRequest, fmt.Sprint("Category cannot be 0"))
 	}
 
 	k.SetResource(ctx, resource)
