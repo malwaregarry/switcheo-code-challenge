@@ -5,7 +5,7 @@ option go_package = "crude/x/crude/types";
 
 message Resource {
   uint64 id = 1;
-  string name = 2; 
-  uint64 category = 3; 
+  string name = 2;
+  uint64 category = 3;
   string creator = 4;
 }

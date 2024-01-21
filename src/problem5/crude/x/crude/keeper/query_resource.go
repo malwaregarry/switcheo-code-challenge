@@ -28,7 +28,9 @@ func (k Keeper) ResourceAll(ctx context.Context, req *types.QueryAllResourceRequ
 			return err
 		}
 
-		resources = append(resources, resource)
+		if req.Category == 0 || req.Category == resource.Category {
+			resources = append(resources, resource)
+		}
 		return nil
 	})
 

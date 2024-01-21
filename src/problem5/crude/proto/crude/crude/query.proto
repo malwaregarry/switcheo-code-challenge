@@ -13,21 +13,18 @@ option go_package = "crude/x/crude/types";
 
 // Query defines the gRPC querier service.
 service Query {
-  
+
   // Parameters queries the parameters of the module.
-  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/crude/crude/params";
-  
   }
-  
+
   // Queries a list of Resource items.
-  rpc Resource    (QueryGetResourceRequest) returns (QueryGetResourceResponse) {
+  rpc Resource(QueryGetResourceRequest) returns (QueryGetResourceResponse) {
     option (google.api.http).get = "/crude/crude/resource/{id}";
-  
   }
-  rpc ResourceAll (QueryAllResourceRequest) returns (QueryAllResourceResponse) {
+  rpc ResourceAll(QueryAllResourceRequest) returns (QueryAllResourceResponse) {
     option (google.api.http).get = "/crude/crude/resource";
-  
   }
 }
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -35,25 +32,24 @@ message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
-  
+
   // params holds all the parameters of this module.
-  Params params = 1 [(gogoproto.nullable) = false, (amino.dont_omitempty) = true];
+  Params params = 1
+      [ (gogoproto.nullable) = false, (amino.dont_omitempty) = true ];
 }
 
-message QueryGetResourceRequest {
-  uint64 id = 1;
-}
+message QueryGetResourceRequest { uint64 id = 1; }
 
 message QueryGetResourceResponse {
-  Resource Resource = 1 [(gogoproto.nullable) = false];
+  Resource Resource = 1 [ (gogoproto.nullable) = false ];
 }
 
 message QueryAllResourceRequest {
-  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+  uint64 category = 1;
+  cosmos.base.query.v1beta1.PageRequest pagination = 2;
 }
 
 message QueryAllResourceResponse {
-  repeated Resource                               Resource   = 1 [(gogoproto.nullable) = false];
-           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+  repeated Resource Resource = 1 [ (gogoproto.nullable) = false ];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
-
